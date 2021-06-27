@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class StudentService {
-  baseUrl = 'https://localhost:5001/api/students';
+  baseUrl = 'https://localhost:5001/api/students/';
 
   constructor(private http: HttpClient) { }
 

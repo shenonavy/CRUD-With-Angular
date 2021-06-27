@@ -1,1 +1,66 @@
-<p>student works!</p>
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Student Entry</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+        <form [formGroup]='registerForm' (ngSubmit)='save()'>
+            <div class="row mt-5" *ngIf="validationErrors.length > 0">
+                <ul class="text-danger">
+                    <li *ngFor="let error of validationErrors">
+                        {{error}}
+                    </li>
+                </ul>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6">
+                    <input
+                     [class.is-invalid]='registerForm.get("stuName")?.errors && registerForm.get("stuName")?.touched'
+                     type="text" class="form-control" placeholder="Name" formControlName="stuName">
+                     <div class="invalid-feedback">Please enter a name</div>
+                </div>
+                <div class="col-6 mt-2">
+                    <label class="control-label" style="margin-right: 10px;">I am a:</label>
+                    <label class="radio-inline">
+                        <input type="radio" value="M" formControlName="stuGender"> Male
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" value="F" class="ms-3 mb-3" formControlName="stuGender"> Female
+                    </label>
+                    <div class="invalid-feedback">Please select a gender</div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6">
+                    <input
+                    [class.is-invalid]='registerForm.get("stuAddress")?.errors && registerForm.get("stuAddress")?.touched'
+                     type="text" class="form-control" placeholder="Address" formControlName="stuAddress">
+                     <div *ngIf="registerForm.get('stuAddress')?.hasError('required')" class="invalid-feedback">Please enter address</div>
+                     <div *ngIf="registerForm.get('stuAddress')?.hasError('minlength')" class="invalid-feedback">Address must be at leat 5 characters</div>
+                     <div *ngIf="registerForm.get('stuAddress')?.hasError('maxlength')" class="invalid-feedback">Address must be at most 50 characters</div>
+                </div>
+                <div class="col-6">
+                    <input
+                    [class.is-invalid]='registerForm.get("stuContactNumber")?.errors && registerForm.get("stuContactNumber")?.touched'
+                     type="text" class="form-control" placeholder="Contact Number" formControlName="stuContactNumber">
+                     <div *ngIf="registerForm.get('stuContactNumber')?.hasError('required')" class="invalid-feedback">Please enter address</div>
+                     <div *ngIf="registerForm.get('stuContactNumber')?.hasError('minlength')" class="invalid-feedback">Address must be at leat 5 characters</div>
+                     <div *ngIf="registerForm.get('stuContactNumber')?.hasError('maxlength')" class="invalid-feedback">Address must be at most 15 characters</div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12">
+                    <input
+                    [class.is-invalid]='registerForm.get("stuDOB")?.errors && registerForm.get("stuDOB")?.touched'
+                     type="text" class="form-control" placeholder="DOB" formControlName="stuDOB">
+                     <div class="invalid-feedback">Please select DOB</div>
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-success">Save</button>
+  </div>
